@@ -1,0 +1,41 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class CarGame extends JPanel implements KeyListener {
+
+    int x = 120;
+
+    public CarGame() {
+        setFocusable(true);
+        addKeyListener(this);
+    }
+
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.setColor(Color.BLUE);
+        g.fillRect(x, 300, 50, 80);
+    }
+
+    public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) x -= 10;
+        if (e.getKeyCode() == KeyEvent.VK_RIGHT) x += 10;
+        repaint();
+    }
+
+    public void keyReleased(KeyEvent e) {}
+    public void keyTyped(KeyEvent e) {}
+
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Car Game");
+        CarGame game = new CarGame();
+
+        frame.add(game);
+        frame.setSize(300, 400);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+
+        game.requestFocus(); // important
+    }
+}
